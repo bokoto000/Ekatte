@@ -1,28 +1,32 @@
 const Sequelize = require("sequelize");
 module.exports = sequelize => {
   const Oblasti = sequelize.define(
-    "oblasti",
+    "obstini",
     {
-      oblast_id: {
-        field: "oblast_id",
+      obstina_id: {
+        field: "obstina_id",
         type: Sequelize.INTEGER,
         autoIncrement: true,
         primaryKey: true
       },
-      oblast: {
-        field: "oblast",
+      obstina: {
+        field: "obstina",
         type: Sequelize.STRING
       },
       ekatte: {
         field: "ekatte",
         type: Sequelize.STRING
       },
-      name: {
-        field: "name",
+      oblast: {
+        field: "oblast",
         type: Sequelize.STRING
       },
       document: {
         field: "document",
+        type: Sequelize.STRING
+      },
+      name: {
+        field: "name",
         type: Sequelize.STRING
       }
     },

@@ -1,25 +1,29 @@
 package ekatte;
 import java.awt.EventQueue;
+import ekatte.getSearchResult;
 import ekatte.OpenFile;
 import ekatte.oblastiData;
 import ekatte.xlxsData;
+import ekatte.getStats;
 
 import javax.swing.JFrame;
 import javax.swing.JFileChooser;
 import javax.swing.JButton;
 import javax.swing.JTextArea;
 import java.awt.event.ActionListener;
+import java.io.IOException;
 import java.awt.event.ActionEvent;
 import javax.swing.AbstractAction;
 import javax.swing.Action;
+import javax.swing.JTextPane;
+import javax.swing.JLabel;
 public class Ekatte {
 
 	private oblastiData oblData= new oblastiData();
 	private obstiniData obsData= new obstiniData();
-	private selishtaData selData= new selishtaData();
+	private selistaData selData= new selistaData();
 	private JFrame frame;
 	private final Action action = new SwingAction();
-	protected FileData FileData;
 
 	/**
 	 * Launch the application.
@@ -112,7 +116,7 @@ public class Ekatte {
 				try {
 					xlxsData data = new xlxsData();
 					data = op.PickFile();
-					oblData.setEnteties(data.getEntities());
+					selData.setEnteties(data.getEntities());
 					path3.setText(data.getPath());
 				} catch (Exception e) {
 					// TODO Auto-generated catch block
@@ -129,8 +133,60 @@ public class Ekatte {
 		frame.getContentPane().add(path3);
 		
 		JButton btnSubmit = new JButton("Submit");
+		btnSubmit.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				try {
+					SubmitData.submitData(oblData, obsData, selData);
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+		});
 		btnSubmit.setBounds(304, 57, 112, 37);
 		frame.getContentPane().add(btnSubmit);
+		
+		JLabel lblNewLabel = new JLabel("");
+		lblNewLabel.setBounds(47, 131, 239, 15);
+		frame.getContentPane().add(lblNewLabel);
+		
+		JLabel lblNewLabel_1 = new JLabel("");
+		lblNewLabel_1.setBounds(57, 210, 344, 15);
+		frame.getContentPane().add(lblNewLabel_1);
+		
+		JTextPane textPane = new JTextPane();
+		textPane.setBounds(47, 177, 129, 21);
+		frame.getContentPane().add(textPane);
+		JButton btnSearch = new JButton("Search");
+		btnSearch.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				try {
+					String s = getSearchResult.getSearchresults(textPane.getText());
+					lblNewLabel_1.setText(s);
+				} catch (Exception e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+		});
+		btnSearch.setBounds(203, 177, 114, 25);
+		frame.getContentPane().add(btnSearch);
+		
+		JButton btnNewButton_2 = new JButton("Reload Stats");
+		btnNewButton_2.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				try {
+					String s = getStats.getStats();
+					lblNewLabel.setText(s);
+				} catch (Exception e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+		});
+		btnNewButton_2.setBounds(304, 126, 134, 25);
+		frame.getContentPane().add(btnNewButton_2);
+		
 	}
 	private class SwingAction extends AbstractAction {
 		public SwingAction() {

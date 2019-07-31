@@ -13,6 +13,7 @@ const sequelize = new Sequelize(credentials.dbname, credentials.username, creden
   port: credentials.port,
   dialect: 'postgres',
   operatorsAliases: false,
+  omitNull:true,
   pool: {
     max: 5,
     min: 0,
