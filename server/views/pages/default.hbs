@@ -1,0 +1,22 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Example App</title>
+</head>
+<body>
+<script>
+    function onSearchClick() {
+        var selo = document.getElementById("selishteData").value;
+        window.location.href = "http://borisvelkovski.com:5000/view-data/"+selo;
+    }
+</script>
+
+<div>
+    <input type="text" name="selishteData" id="selishteData"><br>
+    <button type="button" onclick="onSearchClick()">Search</button>
+</div>
+{{{body}}}
+
+</body>
+</html>
